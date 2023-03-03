@@ -10,15 +10,21 @@ let currentPopup: any = undefined;
 WA.onInit().then(() => {
     console.log('Scripting API ready');
     console.log('Player tags: ',WA.player.tags)
+    //-------------------------------------------------------------------------------------------------------------------------------
 
-    WA.room.area.onEnter('clock').subscribe(() => {
-        const today = new Date();
-        const time = today.getHours() + ":" + today.getMinutes();
-        currentPopup = WA.ui.openPopup("clockPopup", "It's " + time, []);
+    //NPC quokka
+    WA.room.onEnterLayer('npc/npcrobotzone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcrobotpopup","Вот и отлично! Задание выполнено? Не знаю, и мне все равно. Теперь, вводи ответы в терминал, и я узнаю правильно ли ты выполнил задание. Надеюсь, ты не забыл, как пользоваться клавиатурой, ха-ха-ха!",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot.mp3");
+        mysound.play(config);
+        WA.chat.sendChatMessage("Вот и отлично! Задание выполнено? Не знаю, и мне все равно. Теперь, вводи ответы в терминал, и я узнаю правильно ли ты выполнил задание. Надеюсь, ты не забыл, как пользоваться клавиатурой, ха-ха-ха!", "Robot")
     })
+    WA.room.onLeaveLayer('npc/npcrobotzone').subscribe(closePopup)
+    //NPC quokka
 
-    WA.room.area.onLeave('clock').subscribe(closePopup)
 
+
+    //------------------------------------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
     bootstrapExtra().then(() => {
         console.log('Scripting API Extra ready');
