@@ -1651,7 +1651,7 @@
                         {
                          "name":"playAudio",
                          "type":"string",
-                         "value":"hub.mp3"
+                         "value":"sound\/hub.mp3"
                         }],
                  "rotation":0,
                  "visible":true,
