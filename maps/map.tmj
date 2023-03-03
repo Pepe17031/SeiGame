@@ -1585,7 +1585,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1623,7 +1623,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1651,7 +1651,7 @@
                         {
                          "name":"playAudio",
                          "type":"string",
-                         "value":"sound\/hub.mp3"
+                         "value":"hub.mp3"
                         }],
                  "rotation":0,
                  "visible":true,
