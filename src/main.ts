@@ -6,6 +6,10 @@ console.log('Script started successfully');
 
 let currentPopup: any = undefined;
 let currentPopup2: any = undefined;
+let triggerMessage: any = undefined;
+let sound: any = undefined;
+let playerX = 0;
+let playerY = 0;
 
 // Waiting for the API to be ready
 WA.onInit().then(() => {
@@ -13,26 +17,36 @@ WA.onInit().then(() => {
     console.log('Player tags: ',WA.player.tags)
     //-------------------------------------------------------------------------------------------------------------------------------
 
-    //NPC ROBOT
-    WA.room.onEnterLayer('npc/npcrobotzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcrobotpopup","IRON SAMSON: Excellent! Did you complete the task? I don't know, and I don't care. Now, enter your answers into the terminal, and I'll see if you did the task right. Hope you remember how to use a keyboard, ha-ha-ha!",[]);
-        var mysound = WA.sound.loadSound("sound/npc/robot.mp3");
-        mysound.play(config);
+    //FIRE
+    WA.room.area.onEnter('sfire').subscribe(() => {
+    sound = WA.sound.loadSound("sound/fire2.wav").play(config);
     })
-    WA.room.onLeaveLayer('npc/npcrobotzone').subscribe(closePopup)
-    //NPC ROBOT
+
+    WA.room.area.onLeave('sfire').subscribe(() => {
+        stopSound();
+    })
+    //FIRE 
 
     //NPC PIRATE
-    WA.room.onEnterLayer('npc/npcpiratezone').subscribe(() => {
+    WA.room.area.onEnter('npcpiratezone').subscribe(() => {
         currentPopup = WA.ui.openPopup("npcpiratepopup","CAPTAIN BOTTLE-TOP: Welcome aboard, matey! Our ship crashed on this planet, and we need to find all the fragments of the disk with pieces of the encryption key to restart the ship's systems and return home. Each fragment contains a part of the key necessary to start up systems like engines and fire-extinguishing system.",[]);
         var mysound = WA.sound.loadSound("sound/npc/pirate.wav");
         mysound.play(config);
     })
-    WA.room.onLeaveLayer('npc/npcpiratezone').subscribe(closePopup)
+    WA.room.area.onLeave('npcpiratezone').subscribe(closePopup)
     //NPC PIRATE
 
+    //NPC ROBOT
+    WA.room.area.onEnter('npcrobotzone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcrobotpopup","IRON SAMSON: Excellent! Did you complete the task? I don't know, and I don't care. Now, enter your answers into the terminal, and I'll see if you did the task right. Hope you remember how to use a keyboard, ha-ha-ha!",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcrobotzone').subscribe(closePopup)
+    //NPC ROBOT
+
     //NPC ADMIN
-    WA.room.onEnterLayer('npc/npcadminzone').subscribe(() => {
+    WA.room.area.onEnter('npcadminzone').subscribe(() => {
         currentPopup = WA.ui.openPopup("npcadmin1popup","BoJack: Did you notice the violation? Lets ban him?",[]);
         currentPopup2 = WA.ui.openPopup("npcadmin2popup","Zaragossa: I'll keep an eye on him from an ambush...",[]);
         var mysound = WA.sound.loadSound("sound/npc/horse.mp3");
@@ -40,27 +54,474 @@ WA.onInit().then(() => {
         var mysound2 = WA.sound.loadSound("sound/npc/mouse.mp3");
         mysound2.play(config);
     })
-    WA.room.onLeaveLayer('npc/npcadminzone').subscribe(closePopup)
-    WA.room.onLeaveLayer('npc/npcadminzone').subscribe(closePopup2)
+    WA.room.area.onLeave('npcadminzone').subscribe(closePopup)
+    WA.room.area.onLeave('npcadminzone').subscribe(closePopup2)
     //NPC ADMINE
 
     //NPC PIDGIN
-    WA.room.onEnterLayer('npc/npcpidginzone').subscribe(() => {
+    WA.room.area.onEnter('npcpidginzone').subscribe(() => {
         currentPopup = WA.ui.openPopup("npcpidginpopup","FLIPPER: Hello! I find myself in a strange place surrounded by ancient Egyptian pyramids, and I feel that there are secrets hidden behind them that no one has yet uncovered. Can you help me find the answer to what lies behind these images?",[]);
         var mysound = WA.sound.loadSound("sound/npc/pidgin.mp3");
         mysound.play(config);
     })
-    WA.room.onLeaveLayer('npc/npcpidginzone').subscribe(closePopup)
+    WA.room.area.onLeave('npcpidginzone').subscribe(closePopup)
     //NPC PIDGIN
 
     //NPC FROG
-    WA.room.onEnterLayer('npc/npcfrogzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcfrogpopup","Oneloozer: Hey, help me out here! The horse and quokka are making me spin this wheel to generate energy for the server.",[]);
+    WA.room.area.onEnter('npcfrogzone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcfrogpopup","FROG: Hey, help me out here! The horse and quokka are making me spin this wheel to generate energy for the server.",[]);
         var mysound = WA.sound.loadSound("sound/npc/frog.mp3");
         mysound.play(config);
     })
-    WA.room.onLeaveLayer('npc/npcfrogzone').subscribe(closePopup)
+    WA.room.area.onLeave('npcfrogzone').subscribe(closePopup)
     //NPC FROG
+
+    //NPC PANDA
+    WA.room.area.onEnter('npcpanda').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcpandapopup","Friend, don't ask me about Sei, better find me a bamboo.",[]);
+        var mysound = WA.sound.loadSound("sound/npc/panda.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcpanda').subscribe(closePopup)
+    //NPC PANDA
+
+    //NPC JAY
+    WA.room.area.onEnter('npcjay').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcjaypopup","TEXT",[]);
+        var mysound = WA.sound.loadSound("sound/npc/meat.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcjay').subscribe(closePopup)
+    //NPC JAY
+
+    //NPC BUBBLE
+    WA.room.area.onEnter('bubble').subscribe(() => {
+        var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+          });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+
+                var mysound = WA.sound.loadSound("sound/scan.wav");
+                mysound.play(config);
+
+                console.log(playerX, playerY)
+
+                WA.room.website.create({
+                    name: "bubblerweb",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081947537352699914/bubblers.png?width=596&height=675",
+                    position: {
+                      x: playerX + 100,
+                      y: playerY - 335,
+                      width: 596,
+                      height: 675
+                    },
+                    allowApi: true
+                  });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('bubble').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("bubblerweb");
+    })
+    //NPC BUBBLE
+
+    //WOODEN STATUE
+    WA.room.area.onEnter('woodenstatue').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081981852493025300/woodenstatue.png?width=596&height=675",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 596,
+                        height: 675
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('woodenstatue').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //WOODEN STATUE
+
+    //SHARK
+    WA.room.area.onEnter('shark').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081947537843425350/sandshark.png?width=596&height=675",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 596,
+                        height: 675
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('shark').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //SHARK
+
+    //CRYSTAL
+    WA.room.area.onEnter('crystal').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081992872443789373/crystal.png?width=596&height=675",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 596,
+                        height: 675
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('crystal').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //CRYSTAL
+
+    //TWISTEDTREE
+    WA.room.area.onEnter('twistedtree').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081995416826040361/tree.png?width=596&height=675",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 596,
+                        height: 675
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('twistedtree').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //TWISTEDTREE
+
+    //BUSHES
+    WA.room.area.onEnter('bushes').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1082000121409052763/bushes.png?width=596&height=675",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 596,
+                        height: 675
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('bushes').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //BUSHES
+
+    //PIRAMIDMAIN
+    WA.room.area.onEnter('piramidmain').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081654218450010243/e2b43b93f01f5797.png?width=911&height=676",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 911,
+                        height: 676
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('piramidmain').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //PIRAMIDMAIN   
+
+
+    //PIRAMID1
+    WA.room.area.onEnter('piramid1').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655031121592320/2.png?width=911&height=676",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 911,
+                        height: 676
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('piramid1').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //PIRAMID1   
+
+
+    //PIRAMID2
+    WA.room.area.onEnter('piramid2').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655039891865660/3.png?width=911&height=676",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 911,
+                        height: 676
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('piramid2').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //PIRAMID2
+
+    //PIRAMID3
+    WA.room.area.onEnter('piramid3').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655077820965006/4.png?width=911&height=676",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 911,
+                        height: 676
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('piramid3').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //PIRAMID3
+
+    //PIRAMID4
+    WA.room.area.onEnter('piramid4').subscribe(() => {
+        //var mysound = WA.sound.loadSound("sound/npc/bubble.mp3");
+        //mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 911,
+                        height: 676
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('piramid4').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //PIRAMID4 
+    
+        //BZZZ
+        WA.room.area.onEnter('bzzz').subscribe(() => {
+            var mysound = WA.sound.loadSound("sound/npc/bzzz.mp3");
+            mysound.play(config);
+            WA.player.onPlayerMove((moveEvent) => {
+                playerX = moveEvent.x;
+                playerY = moveEvent.y;
+                });
+    
+            triggerMessage = WA.ui.displayActionMessage({
+                message: "Press the 'SPACE' to scan",
+                callback: () => {
+                    sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                    WA.room.website.create({
+                        name: "coWeb",
+                        url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676",
+                        position: {
+                            x: playerX + 100,
+                            y: playerY - 335,
+                            width: 911,
+                            height: 676
+                        },
+                        allowApi: true
+                        });
+                }
+            });
+    
+        })
+        WA.room.area.onLeave('bzzz').subscribe(() => {
+            closeTriger();
+            WA.room.website.delete("coWeb");
+            stopSound();
+        })
+        //BZZZ
+
+
+
 
 
     //------------------------------------------------------------------------------------------------------------------------------
@@ -85,9 +546,25 @@ function closePopup2(){
     }
 }
 
+function closeTriger(){
+    if (triggerMessage !== undefined) {
+        triggerMessage.remove();
+        triggerMessage = undefined;
+    }
+}
+
+function stopSound(){
+    if (sound !== undefined) {
+        WA.sound.loadSound(sound).stop();
+        sound = undefined;
+    }
+}
+
+
+
 //NPC SOUND
 var config = {
-    volume : 1,
+    volume : 0.4,
     loop : false,
     rate : 1,
     detune : 1,
@@ -96,4 +573,5 @@ var config = {
     mute : false
 };
 
+      
 export {};
