@@ -13,7 +13,6 @@ let playerY = 0;
 let nav: any = undefined;
 let fearX = 0;
 let fearY = 0;
-let check: any = undefined;
 
 // Waiting for the API to be ready
 WA.onInit().then(() => {
