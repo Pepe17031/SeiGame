@@ -13,12 +13,15 @@ let playerY = 0;
 let nav: any = undefined;
 let fearX = 0;
 let fearY = 0;
+let check: any = undefined;
 
 // Waiting for the API to be ready
 WA.onInit().then(() => {
     console.log('Scripting API ready');
     console.log('Player tags: ',WA.player.tags)
     //-------------------------------------------------------------------------------------------------------------------------------
+
+    WA.room.hideLayer("monsterlab");
 
     //FIRE
     WA.room.area.onEnter('sfire').subscribe(() => {
@@ -116,7 +119,7 @@ WA.onInit().then(() => {
                 console.log(playerX, playerY)
 
                 WA.room.website.create({
-                    name: "bubblerweb",
+                    name: 'bubblerweb',
                     url: "https://media.discordapp.net/attachments/1081590822379720724/1081947537352699914/bubblers.png?width=596&height=675",
                     position: {
                       x: playerX + 100,
@@ -132,7 +135,7 @@ WA.onInit().then(() => {
     })
     WA.room.area.onLeave('bubble').subscribe(() => {
         closeTriger();
-        WA.room.website.delete("bubblerweb");
+        WA.room.website.delete('bubblerweb');
     })
     //NPC BUBBLE
 
@@ -529,7 +532,8 @@ WA.onInit().then(() => {
     });
 
     // MONSTR
-    WA.room.area.onEnter('test').subscribe(() => {
+    WA.room.area.onEnter('monster').subscribe(() => {
+
 
         console.log(playerX, playerY, nav)
 
@@ -565,6 +569,8 @@ WA.onInit().then(() => {
                 }
         }
 
+        WA.room.showLayer("monsterlab");
+
         sound = WA.sound.loadSound("sound/lab/fear.wav").play(config);
         sound = WA.sound.loadSound("sound/lab/monster.wav").play(config);
         setTimeout(() => {
@@ -578,10 +584,17 @@ WA.onInit().then(() => {
         setTimeout(() => {
             // later
             WA.controls.restorePlayerControls();
-            WA.player.removeOutlineColor(); 
+            WA.player.removeOutlineColor();
+            WA.room.hideLayer("monsterlab");
         }, 2000)
 
     })
+
+    WA.room.area.onLeave('monster').subscribe(() => {
+
+    })
+
+    
     //  MONSTR 
     
     //TELEPORT
