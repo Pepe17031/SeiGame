@@ -10,6 +10,9 @@ let triggerMessage: any = undefined;
 let sound: any = undefined;
 let playerX = 0;
 let playerY = 0;
+let nav: any = undefined;
+let fearX = 0;
+let fearY = 0;
 
 // Waiting for the API to be ready
 WA.onInit().then(() => {
@@ -485,44 +488,106 @@ WA.onInit().then(() => {
     })
     //PIRAMID4 
     
-        //BZZZ
-        WA.room.area.onEnter('bzzz').subscribe(() => {
-            var mysound = WA.sound.loadSound("sound/npc/bzzz.mp3");
-            mysound.play(config);
-            WA.player.onPlayerMove((moveEvent) => {
-                playerX = moveEvent.x;
-                playerY = moveEvent.y;
-                });
-    
-            triggerMessage = WA.ui.displayActionMessage({
-                message: "Press the 'SPACE' to scan",
-                callback: () => {
-                    sound = WA.sound.loadSound("sound/scan.wav").play(config);
-                    WA.room.website.create({
-                        name: "coWeb",
-                        url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676",
-                        position: {
-                            x: playerX + 100,
-                            y: playerY - 335,
-                            width: 911,
-                            height: 676
-                        },
-                        allowApi: true
-                        });
-                }
+    //BZZZ
+    WA.room.area.onEnter('bzzz').subscribe(() => {
+        var mysound = WA.sound.loadSound("sound/npc/bzzz.mp3");
+        mysound.play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
             });
-    
-        })
-        WA.room.area.onLeave('bzzz').subscribe(() => {
-            closeTriger();
-            WA.room.website.delete("coWeb");
-            stopSound();
-        })
-        //BZZZ
 
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 911,
+                        height: 676
+                    },
+                    allowApi: true
+                    });
+            }
+        });
 
+    })
+    WA.room.area.onLeave('bzzz').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+        stopSound();
+    })
+    //BZZZ
+    WA.player.onPlayerMove((moveEvent) => {
+        playerX = moveEvent.x;
+        playerY = moveEvent.y;
+        nav = moveEvent.direction;
+    });
 
+    //
+    WA.room.area.onEnter('test').subscribe(() => {
 
+        console.log(playerX, playerY, nav)
+
+        WA.controls.disablePlayerControls();
+        WA.player.setOutlineColor(255, 0, 0);
+
+        if (nav === 'left') {
+            console.log('nav is left');
+            fearX = playerX + 400;
+            fearY = playerY;
+            } else {
+
+                if (nav === 'right') {
+                    fearX = playerX - 400
+                    fearY = playerY;
+                    console.log('right');
+                    } else {
+
+                        if (nav === 'up') {
+                            fearY = playerY + 400
+                            fearX = playerX;
+                            console.log('up');
+                            } else {
+
+                                if (nav === 'down') {
+                                    fearY = playerY - 400
+                                    fearX = playerX;
+                                    console.log('down');
+                                    } else {
+                                    console.log('error');
+                                }
+                        }
+                }
+        }
+
+        sound = WA.sound.loadSound("sound/lab/fear.wav").play(config);
+        sound = WA.sound.loadSound("sound/lab/monster.wav").play(config);
+        setTimeout(() => {
+            // later
+            sound = WA.sound.loadSound("sound/lab/scream.wav").play(config);
+        }, 200)
+
+        WA.player.moveTo(fearX, fearY, 20);
+        
+
+        setTimeout(() => {
+            // later
+            WA.controls.restorePlayerControls();
+            WA.player.removeOutlineColor(); 
+        }, 2000)
+
+    })
+
+    WA.room.area.onLeave('test').subscribe(() => {
+            
+    })
+
+    //       
 
     //------------------------------------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
@@ -559,7 +624,6 @@ function stopSound(){
         sound = undefined;
     }
 }
-
 
 
 //NPC SOUND
