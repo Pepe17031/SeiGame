@@ -2163,6 +2163,17 @@
                  "width":153.833333333333,
                  "x":5094.16666666667,
                  "y":3043.08333333333
+                }, 
+                {
+                 "class":"area",
+                 "height":159,
+                 "id":162,
+                 "name":"teleport",
+                 "rotation":0,
+                 "visible":true,
+                 "width":234,
+                 "x":4825,
+                 "y":2740
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3518,7 +3529,7 @@
          "y":0
         }],
  "nextlayerid":68,
- "nextobjectid":162,
+ "nextobjectid":164,
  "orientation":"orthogonal",
  "properties":[
         {

@@ -528,7 +528,7 @@ WA.onInit().then(() => {
         nav = moveEvent.direction;
     });
 
-    //
+    // MONSTR
     WA.room.area.onEnter('test').subscribe(() => {
 
         console.log(playerX, playerY, nav)
@@ -582,12 +582,14 @@ WA.onInit().then(() => {
         }, 2000)
 
     })
-
-    WA.room.area.onLeave('test').subscribe(() => {
-            
+    //  MONSTR 
+    
+    //TELEPORT
+    WA.room.area.onEnter('teleport').subscribe(() => {
+        sound = WA.sound.loadSound("sound/lab/fear.wav").play(config);
+        WA.nav.goToRoom("https://play.workadventu.re/_/global/pepe17031.github.io/SeiGame/maps/map.tmj#start")
     })
-
-    //       
+    //TELEPORT
 
     //------------------------------------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
