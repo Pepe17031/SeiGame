@@ -592,16 +592,66 @@ WA.onInit().then(() => {
     WA.room.area.onLeave('monster').subscribe(() => {
 
     })
-
-    
     //  MONSTR 
     
     //TELEPORT
     WA.room.area.onEnter('teleport').subscribe(() => {
-        sound = WA.sound.loadSound("sound/lab/fear.wav").play(config);
+        sound = WA.sound.loadSound("sound/lab/teleport.wav").play(config);
         WA.nav.goToRoom("https://play.workadventu.re/_/global/pepe17031.github.io/SeiGame/maps/map.tmj#start")
     })
     //TELEPORT
+
+    //LABWORD
+    WA.room.area.onEnter('labword').subscribe(() => {
+        sound = WA.sound.loadSound("sound/lab/win.mp3").play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1080545122669834332/1083019062185041971/2_2.png?width=911&height=676",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 911,
+                        height: 676
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('labword').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //LABWORD 
+
+    //NPC LABFROG
+    WA.room.area.onEnter('labfrogzone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("labfrog","TEXT",[]);
+        var mysound = WA.sound.loadSound("sound/lab/frog.wav");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('labfrogzone').subscribe(closePopup)
+    //NPC LABFROG
+    
+    //NPC LABBOBR
+    WA.room.area.onEnter('labbobrzone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("labbobr","TEXT",[]);
+        var mysound = WA.sound.loadSound("sound/lab/bobr.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('labbobrzone').subscribe(closePopup)
+    //NPC LABBOBR
 
     //------------------------------------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
