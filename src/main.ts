@@ -92,7 +92,7 @@ WA.onInit().then(() => {
 
     //NPC JAY
     WA.room.area.onEnter('npcjay').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcjaypopup","TEXT",[]);
+        currentPopup = WA.ui.openPopup("npcjaypopup","Are you hungry? Sei no more - your food is not here!",[]);
         var mysound = WA.sound.loadSound("sound/npc/meat.mp3");
         mysound.play(config);
     })
@@ -637,7 +637,7 @@ WA.onInit().then(() => {
 
     //NPC LABFROG
     WA.room.area.onEnter('labfrogzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("labfrog","TEXT F",[]);
+        currentPopup = WA.ui.openPopup("labfrog","Hey buddy. I was running from the moderators and got lost. Something weird is going on here... But you know, I like it, don't tell anyone you saw me.",[]);
         var mysound = WA.sound.loadSound("sound/lab/frog.wav");
         mysound.play(config);
     })
