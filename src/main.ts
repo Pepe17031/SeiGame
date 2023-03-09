@@ -512,18 +512,18 @@ WA.onInit().then(() => {
                     sound = WA.sound.loadSound("sound/scan.wav").play(config);
                     WA.room.website.create({
                         name: "coWeb",
-                        url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676",
+                        url: "https://media.discordapp.net/attachments/1081590822379720724/1083454474737168426/04.png?width=596&height=675",
                         position: {
                             x: playerX + 100,
                             y: playerY - 335,
-                            width: 911,
-                            height: 676
+                            width: 596,
+                            height: 675
                         },
                         allowApi: true
                     });
                 } else {
 
-                    WA.nav.openTab('https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676');
+                    WA.nav.openTab('https://media.discordapp.net/attachments/1081590822379720724/1083454474737168426/04.png?width=596&height=675');
 
                 }
 
