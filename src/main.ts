@@ -13,7 +13,7 @@ let playerY = 0;
 let nav: any = undefined;
 let fearX = 0;
 let fearY = 0;
-const mobile: boolean = /Mobi|Android/i.test(navigator.userAgent);
+const mobile: boolean = /Mobi|Android|iPhone/i.test(navigator.userAgent);
 
 // Waiting for the API to be ready
 WA.onInit().then(() => {
@@ -35,7 +35,7 @@ WA.onInit().then(() => {
 
     //NPC PIRATE
     WA.room.area.onEnter('npcpiratezone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcpiratepopup","CAPTAIN BOTTLE-TOP: Welcome aboard, matey! Our ship crashed on this planet, and we need to find all the fragments of the disk with pieces of the encryption key to restart the ship's systems and return home. Each fragment contains a part of the key necessary to start up systems like engines and fire-extinguishing system.",[]);
+        currentPopup = WA.ui.openPopup("npcpiratepopup","CAPTAIN BOTTLE-TOP: Welcome on board, mate! Our spaceship crashed on this Unknown Planet, and we must find our way back home! I learned that we must solve the riddles to defeat the Force of the Unknown Planet and get our spaceship free to go back home!Lets do this!",[]);
         var mysound = WA.sound.loadSound("sound/npc/pirate.wav");
         mysound.play(config);
     })
@@ -88,7 +88,11 @@ WA.onInit().then(() => {
         var mysound = WA.sound.loadSound("sound/npc/panda.mp3");
         mysound.play(config);
     })
-    WA.room.area.onLeave('npcpanda').subscribe(closePopup)
+    WA.room.area.onLeave('npcpanda').subscribe(() => {
+        var mysound = WA.sound.loadSound("sound/npc/panda.mp3");
+        mysound.play(config);
+        closePopup;
+    })
     //NPC PANDA
 
     //NPC JAY
