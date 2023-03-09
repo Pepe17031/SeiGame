@@ -665,7 +665,7 @@ WA.onInit().then(() => {
     
     //NPC LABBOBR
     WA.room.area.onEnter('labbobrzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("labbobr","TEXT B",[]);
+        currentPopup = WA.ui.openPopup("labbobr","Hey, you won't get any answers from me, don't even think about that. And remember, I'm watching you!",[]);
         var mysound = WA.sound.loadSound("sound/lab/bobr.mp3");
         mysound.play(config);
     })
