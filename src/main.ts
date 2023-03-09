@@ -13,6 +13,7 @@ let playerY = 0;
 let nav: any = undefined;
 let fearX = 0;
 let fearY = 0;
+const mobile: boolean = /Mobi|Android/i.test(navigator.userAgent);
 
 // Waiting for the API to be ready
 WA.onInit().then(() => {
@@ -502,18 +503,26 @@ WA.onInit().then(() => {
         triggerMessage = WA.ui.displayActionMessage({
             message: "Press the 'SPACE' to scan",
             callback: () => {
-                sound = WA.sound.loadSound("sound/scan.wav").play(config);
-                WA.room.website.create({
-                    name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676",
-                    position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 911,
-                        height: 676
-                    },
-                    allowApi: true
+
+                if (mobile === false) {
+                    sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                    WA.room.website.create({
+                        name: "coWeb",
+                        url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676",
+                        position: {
+                            x: playerX + 100,
+                            y: playerY - 335,
+                            width: 911,
+                            height: 676
+                        },
+                        allowApi: true
                     });
+                } else {
+
+                    WA.nav.openTab('https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676');
+
+                }
+
             }
         });
 
@@ -522,8 +531,14 @@ WA.onInit().then(() => {
         closeTriger();
         WA.room.website.delete("coWeb");
         stopSound();
+        if (mobile === true) {
+            console.log('true');
+            } else {
+            console.log('false');
+        }
     })
     //BZZZ
+
     WA.player.onPlayerMove((moveEvent) => {
         playerX = moveEvent.x;
         playerY = moveEvent.y;
