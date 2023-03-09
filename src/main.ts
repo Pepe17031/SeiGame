@@ -656,7 +656,7 @@ WA.onInit().then(() => {
 
     //NPC LABFROG
     WA.room.area.onEnter('labfrogzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("labfrog","Hey buddy. I was running from the moderators and got lost. Something weird is going on here... But you know, I like it, don't tell anyone you saw me.",[]);
+        currentPopup = WA.ui.openPopup("labfrog","If you misbehave, I'll eat you like that frog.",[]);
         var mysound = WA.sound.loadSound("sound/lab/frog.wav");
         mysound.play(config);
     })
