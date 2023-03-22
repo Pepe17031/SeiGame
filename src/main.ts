@@ -535,11 +535,27 @@ WA.onInit().then(() => {
         closeTriger();
         WA.room.website.delete("coWeb");
         stopSound();
-        if (mobile === true) {
-            console.log('true');
-            } else {
-            console.log('false');
-        }
+
+
+        
+        WA.player.getWokaPicture().then(() => {
+
+            //WA.player.getWokaPicture();
+            
+            
+              
+            WA.player.getWokaPicture().then(result => {
+                const resultAsString = String(result);
+                console.log(resultAsString);
+            });
+
+
+        });
+
+
+
+
+
     })
     //BZZZ
 
