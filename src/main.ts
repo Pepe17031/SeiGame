@@ -88,11 +88,8 @@ WA.onInit().then(() => {
         var mysound = WA.sound.loadSound("sound/npc/panda.mp3");
         mysound.play(config);
     })
-    WA.room.area.onLeave('npcpanda').subscribe(() => {
-        var mysound = WA.sound.loadSound("sound/npc/panda.mp3");
-        mysound.play(config);
-        closePopup;
-    })
+    WA.room.area.onLeave('npcpanda').subscribe(closePopup)
+
     //NPC PANDA
 
     //NPC JAY
@@ -687,12 +684,246 @@ WA.onInit().then(() => {
     })
     WA.room.area.onLeave('labbobrzone').subscribe(closePopup)
     //NPC LABBOBR
+    
+    //-------------------------LAVA VULCANO------------------------------------------------------------------------------------------------------
+    
+    //NPC LAVA1
+    WA.room.area.onEnter('npclava1').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npclava1popup","I'm researching these strange statues and noticed that they have symbols engraved on them. I think a word can be formed from them. Solve the anagram, and perhaps we'll discover the secrets of this planet.",[]);
+        var mysound = WA.sound.loadSound("sound/npc/wizardlava.wav");
+        mysound.play(config);
+        
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/scan.wav").play(config);
+                //console.log(playerX, playerY);
+                WA.room.website.create({
+                    name: "coWeb",
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088846637566267533/all.png?width=911&height=676",
+                    position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 911,
+                        height: 676
+                    },
+                    allowApi: true
+                    });
+            }
+        });
+    })
+    WA.room.area.onLeave('npclava1').subscribe(() => {
+        closeTriger();
+        closePopup();
+        WA.room.website.delete("coWeb");
+    })
+    //NPC LAVA1
 
-    //------------------------------------------------------------------------------------------------------------------------------
+    //NPC LAVA2
+    WA.room.area.onEnter('npclava2').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npclava2popup","I'm studying these crystals and discovered that one of them pulses in a strange rhythm. I believe it's a message encoded in Morse code. Decipher it. You can find hints in my library.",[]);
+        var mysound = WA.sound.loadSound("sound/lava/fire.wav");
+        mysound.play(config);
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to listen stone",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/lava/seim.mp3").play(config);
+                
+            }
+        });
+    })
+    WA.room.area.onLeave('npclava2').subscribe(() => {
+        closeTriger();
+        closePopup();
+        WA.room.website.delete("coWeb");
+    })
+    //NPC LAVA2
+
+    //LAVABOOKS
+    WA.room.area.onEnter('lavabooks').subscribe(() => {
+        sound = WA.sound.loadSound("sound/lava/book.wav").play(config);
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+            });
+            WA.room.website.create({
+                name: "coWeb",
+                url: "https://media.discordapp.net/attachments/1080545477625380936/1088825752327311440/morze.png?width=676&height=676",
+                position: {
+                    x: playerX - 800,
+                    y: playerY - 435,
+                    width: 676,
+                    height: 676  
+                },
+                allowApi: true
+                });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to listen SOS",
+            callback: () => {
+                sound = WA.sound.loadSound("sound/lava/sosm.mp3").play(config);
+                
+            }
+        });
+
+    })
+    WA.room.area.onLeave('lavabooks').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete("coWeb");
+    })
+    //LAVABOOKS 
+
+    //LAVAC
+    WA.room.area.onEnter('lavaC').subscribe(() => {
+
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+          });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+
+                var mysound = WA.sound.loadSound("sound/scan.wav");
+                mysound.play(config);
+
+                WA.room.website.create({
+                    name: 'coWeb',
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851020504899604/C.png?width=911&height=676",
+                    position: {
+                      x: playerX + 100,
+                      y: playerY - 335,
+                      width: 911,
+                      height: 676
+                    },
+                    allowApi: true
+                  });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('lavaC').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete('coWeb');
+    })
+    //LAVAC
+
+    //LAVAO
+    WA.room.area.onEnter('lavaO').subscribe(() => {
+
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+          });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+
+                var mysound = WA.sound.loadSound("sound/scan.wav");
+                mysound.play(config);
+
+                WA.room.website.create({
+                    name: 'coWeb',
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851021431840799/o.png?width=911&height=676",
+                    position: {
+                      x: playerX - 1000,
+                      y: playerY - 335,
+                      width: 911,
+                      height: 676
+                    },
+                    allowApi: true
+                  });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('lavaO').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete('coWeb');
+    })
+    //LAVAO
+
+    //LAVAS
+    WA.room.area.onEnter('lavaS').subscribe(() => {
+
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+          });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+
+                var mysound = WA.sound.loadSound("sound/scan.wav");
+                mysound.play(config);
+
+                WA.room.website.create({
+                    name: 'coWeb',
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851021431840799/o.png?width=911&height=676",
+                    position: {
+                      x: playerX + 100,
+                      y: playerY - 335,
+                      width: 911,
+                      height: 676
+                    },
+                    allowApi: true
+                  });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('lavaS').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete('coWeb');
+    })
+    //LAVAS
+
+    //LAVAM
+    WA.room.area.onEnter('lavaM').subscribe(() => {
+
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+          });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+
+                var mysound = WA.sound.loadSound("sound/scan.wav");
+                mysound.play(config);
+
+                WA.room.website.create({
+                    name: 'coWeb',
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851020832047224/m.png?width=911&height=676",
+                    position: {
+                      x: playerX + 100,
+                      y: playerY - 335,
+                      width: 911,
+                      height: 676
+                    },
+                    allowApi: true
+                  });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('lavaM').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete('coWeb');
+    })
+    //LAVAM
+
+    //---------------------------LAVA VULCANO---------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
     bootstrapExtra().then(() => {
         console.log('Scripting API Extra ready');
     }).catch(e => console.error(e));
+
+    
 
 }).catch(e => console.error(e));
 
