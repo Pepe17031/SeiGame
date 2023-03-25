@@ -917,7 +917,86 @@ WA.onInit().then(() => {
     })
     //LAVAM
 
-    //---------------------------LAVA VULCANO---------------------------------------------------------------------------------------------------
+    //---------------------------UNDERWATER---------------------------------------------------------------------------------------------------
+
+    //NPC 8
+    WA.room.area.onEnter('npcwater8zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcwater8popup","I am a two-letter word, but I represent something that is all around us. The more you take away, the more I become. What am I",[]);
+        var mysound = WA.sound.loadSound("sound/under/8.wav");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcwater8zone').subscribe(closePopup)
+    //NPC 8
+
+    //NPC CRAB
+    WA.room.area.onEnter('npcwatercrabzone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcwatercrabpopup","I am a five-letter word, but I am often seen as a single letter on a playing card. I represent a powerful figure. What am I?",[]);
+        var mysound = WA.sound.loadSound("sound/under/crab.wav");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcwatercrabzone').subscribe(closePopup)
+    //NPC CRAB
+
+    //NPC RUS
+    WA.room.area.onEnter('npcwaterruszone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcwaterruspopup","I am a sweet treat often enjoyed after a meal, and I come in many flavors and forms. What am I?",[]);
+        var mysound = WA.sound.loadSound("sound/under/rus.wav");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcwaterruszone').subscribe(closePopup)
+    //NPC RUS
+
+    //NPC SHARK
+    WA.room.area.onEnter('npcwatersharkzone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcwatersharkpopup","I am a part of your body, and I am always in the same place. I cannot be removed or changed, yet I am different for each person. What am I?",[]);
+        var mysound = WA.sound.loadSound("sound/under/shark.wav");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcwatersharkzone').subscribe(closePopup)
+    //NPC SHARK
+
+    //LAVAM
+    WA.room.area.onEnter('underinfo').subscribe(() => {
+
+        WA.player.onPlayerMove((moveEvent) => {
+            playerX = moveEvent.x;
+            playerY = moveEvent.y;
+          });
+
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to scan",
+            callback: () => {
+
+                var mysound = WA.sound.loadSound("sound/scan.wav");
+                mysound.play(config);
+                currentPopup = WA.ui.openPopup("underinfopopup","QUEST UNDERWATER",[]);
+
+
+                WA.room.website.create({
+                    name: 'coWeb',
+                    url: "https://media.discordapp.net/attachments/1080545536349835434/1089137081630072914/18fc7226d0914eeb.png?width=911&height=676",
+                    position: {
+                      x: playerX + 100,
+                      y: playerY - 335,
+                      width: 911,
+                      height: 676
+                    },
+                    allowApi: true
+                  });
+            }
+        });
+
+    })
+    WA.room.area.onLeave('underinfo').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete('coWeb');
+        closePopup();
+    })
+    //UNDER
+
+
+
+    //---------------------------UNDERWATER---------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
     bootstrapExtra().then(() => {
         console.log('Scripting API Extra ready');
