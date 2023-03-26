@@ -996,7 +996,110 @@ WA.onInit().then(() => {
 
 
 
-    //---------------------------UNDERWATER---------------------------------------------------------------------------------------------------
+    //---------------------------OASIS ---------------------------------------------------------------------------------------------------
+
+    //NPC OASIS
+    WA.room.area.onEnter('npcoasiszone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasispopup","OASIS ROBOT",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasiszone').subscribe(closePopup)
+    //NPC OASIS
+
+    //NPC OASIS 1
+    WA.room.area.onEnter('npcoasis1zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis1popup","Robot #1: T",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis1zone').subscribe(closePopup)
+    //NPC OASIS 1
+
+    //NPC OASIS 2
+    WA.room.area.onEnter('npcoasis2zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis2popup","Robot #2: E",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis2zone').subscribe(closePopup)
+    //NPC OASIS 2
+
+    //NPC OASIS 3
+    WA.room.area.onEnter('npcoasis3zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis3popup","Robot #3: N",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis3zone').subscribe(closePopup)
+    //NPC OASIS 3
+
+    //NPC OASIS 4
+    WA.room.area.onEnter('npcoasis4zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis4popup","Robot #4: D",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis4zone').subscribe(closePopup)
+    //NPC OASIS 4
+
+    //NPC OASIS 5
+    WA.room.area.onEnter('npcoasis5zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis5popup","Robot #5: E",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis5zone').subscribe(closePopup)
+    //NPC OASIS 5
+
+    //NPC OASIS 6 
+    WA.room.area.onEnter('npcoasis6zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis6popup","Robot #6: R",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis6zone').subscribe(closePopup)
+    //NPC OASIS 6
+
+    //NPC OASIS 7
+    WA.room.area.onEnter('npcoasis7zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis7popup","Robot #7: M",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis7zone').subscribe(closePopup)
+    //NPC OASIS 7
+
+    //NPC OASIS 8
+    WA.room.area.onEnter('npcoasis8zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis8popup","Robot #8: I",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis8zone').subscribe(closePopup)
+    //NPC OASIS 8
+
+    //NPC OASIS 9
+    WA.room.area.onEnter('npcoasis9zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis9popup","Robot #9: N",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis9zone').subscribe(closePopup)
+    //NPC OASIS 9
+
+    //NPC OASIS 0
+    WA.room.area.onEnter('npcoasis0zone').subscribe(() => {
+        currentPopup = WA.ui.openPopup("npcoasis0popup","Robot #10: T",[]);
+        var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+        mysound.play(config);
+    })
+    WA.room.area.onLeave('npcoasis0zone').subscribe(closePopup)
+    //NPC OASIS 0
+
+
+
+    // ------------------------------------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
     bootstrapExtra().then(() => {
         console.log('Scripting API Extra ready');
