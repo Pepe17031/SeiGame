@@ -2,6 +2,11 @@
 
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 
+
+
+
+
+
 console.log('Script started successfully');
 
 let currentPopup: any = undefined;
@@ -15,10 +20,39 @@ let fearX = 0;
 let fearY = 0;
 const mobile: boolean = /Mobi|Android|iPhone/i.test(navigator.userAgent);
 
+
+
 // Waiting for the API to be ready
 WA.onInit().then(() => {
+
+    
     console.log('Scripting API ready');
     console.log('Player tags: ',WA.player.tags)
+
+    WA.ui.actionBar.addButton({
+        id: 'map-btn',
+        type: 'action',
+        imageSrc: 'https://media.discordapp.net/attachments/1080545367126446162/1089911833378443364/map.png',
+        toolTip: 'Map',
+        callback: (event: any) => {
+            console.log('Button clicked', event);
+            // When a user clicks on the action bar button 'Register', we remove it.
+
+
+            
+            WA.ui.modal.openModal({
+                title: "SeiVerse Map",
+                src: 'https://i.ibb.co/R6CTRTg/map-1.png',
+                position: "left"
+            });
+
+
+
+
+
+
+        }
+    });
     //-------------------------------------------------------------------------------------------------------------------------------
 
     WA.room.hideLayer("monsterlab");
@@ -1097,7 +1131,95 @@ WA.onInit().then(() => {
     WA.room.area.onLeave('npcoasis0zone').subscribe(closePopup)
     //NPC OASIS 0
 
+    //--------------------------JUNGLE------------------------------------------------------------------------
 
+        //NPC JUNGLE1
+        WA.room.area.onEnter('jungle1zone').subscribe(() => {
+            currentPopup = WA.ui.openPopup("jungle1popup","I was making my way through the jungle when I stumbled upon this clearing. It seems there's something on that tree over there, but I can't seem to reach it. Would you mind investigating it for me?",[]);
+            var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+            mysound.play(config);
+
+            WA.player.onPlayerMove((moveEvent) => {
+                playerX = moveEvent.x;
+                playerY = moveEvent.y;
+              });
+    
+            triggerMessage = WA.ui.displayActionMessage({
+                message: "Press the 'SPACE' to scan",
+                callback: () => {
+    
+                    var mysound = WA.sound.loadSound("sound/scan.wav");
+                    mysound.play(config);
+    
+                    WA.room.website.create({
+                        name: 'coWeb',
+                        url: "https://media.discordapp.net/attachments/1080545367126446162/1089225147476627656/1a4050f6eed938f5.png?width=1018&height=676",
+                        position: {
+                          x: playerX + 100,
+                          y: playerY - 335,
+                          width: 1018,
+                          height: 676
+                        },
+                        allowApi: true
+                      });
+                }
+            });
+    
+        })
+
+        WA.room.area.onLeave('jungle1zone').subscribe(() => {
+            closeTriger();
+            WA.room.website.delete('coWeb');
+            closePopup();
+        })        
+        //NPC JUNGLE1
+
+        //NPC Jungle tab
+        WA.room.area.onEnter('jungletab').subscribe(() => {
+
+            WA.player.onPlayerMove((moveEvent) => {
+                playerX = moveEvent.x;
+                playerY = moveEvent.y;
+            });
+
+            triggerMessage = WA.ui.displayActionMessage({
+                message: "Press the 'SPACE' to scan",
+                callback: () => {
+
+                    var mysound = WA.sound.loadSound("sound/scan.wav");
+                    mysound.play(config);
+
+                    console.log(playerX, playerY)
+
+                    WA.room.website.create({
+                        name: 'coWeb',
+                        url: "https://media.discordapp.net/attachments/1080545367126446162/1089225085199597588/2.png?width=1018&height=676",
+                        position: {
+                        x: playerX + 100,
+                        y: playerY - 335,
+                        width: 1018,
+                        height: 676
+                        },
+                        allowApi: true
+                    });
+                }
+            });
+
+        })
+        WA.room.area.onLeave('jungletab').subscribe(() => {
+            closeTriger();
+            WA.room.website.delete('coWeb');
+        })
+        //NPC Jungle tab
+
+        //NPC JUNGLE2
+        WA.room.area.onEnter('jungle2zone').subscribe(() => {
+            currentPopup = WA.ui.openPopup("jungle2popup","JUNGLE1",[]);
+            var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
+            mysound.play(config);
+        })
+        WA.room.area.onLeave('jungle2zone').subscribe(closePopup)
+        //NPC JUNGLE2
 
     // ------------------------------------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
