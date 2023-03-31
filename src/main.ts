@@ -29,30 +29,7 @@ WA.onInit().then(() => {
     console.log('Scripting API ready');
     console.log('Player tags: ',WA.player.tags)
 
-    WA.ui.actionBar.addButton({
-        id: 'map-btn',
-        type: 'action',
-        imageSrc: 'https://media.discordapp.net/attachments/1080545367126446162/1089911833378443364/map.png',
-        toolTip: 'Map',
-        callback: (event: any) => {
-            console.log('Button clicked', event);
-            // When a user clicks on the action bar button 'Register', we remove it.
 
-
-            
-            WA.ui.modal.openModal({
-                title: "SeiVerse Map",
-                src: 'https://i.ibb.co/R6CTRTg/map-1.png',
-                position: "left"
-            });
-
-
-
-
-
-
-        }
-    });
     //-------------------------------------------------------------------------------------------------------------------------------
 
     WA.room.hideLayer("monsterlab");
