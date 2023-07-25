@@ -7,7 +7,8 @@ import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 
 
 
-console.log('Script started successfully');
+console.log('Script started successfully!');
+
 
 let currentPopup: any = undefined;
 let currentPopup2: any = undefined;
@@ -29,6 +30,7 @@ WA.onInit().then(() => {
     console.log('Scripting API ready');
     console.log('Player tags: ',WA.player.tags)
 
+    WA.nav.openCoWebSite('https://media.discordapp.net/attachments/1045861157883351091/1133220069414031451/2.png?width=632&height=676', true, "", 40, 1, true, false);
 
     //-------------------------------------------------------------------------------------------------------------------------------
 
@@ -95,12 +97,24 @@ WA.onInit().then(() => {
 
     //NPC PANDA
     WA.room.area.onEnter('npcpanda').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcpandapopup","Friend, don't ask me about Sei, better find me a bamboo.",[]);
+        currentPopup = WA.ui.openPopup("npcpandapopup","Listen, traveler! We need your assistance. Could you kindly retweet our message to spread the word? Your support is invaluable to us! As a gesture of gratitude, we'll be rewarding some lucky retweeters with exciting surprises. Thank you, and best of luck on your journey!",[]);
         var mysound = WA.sound.loadSound("sound/npc/panda.mp3");
         mysound.play(config);
-    })
-    WA.room.area.onLeave('npcpanda').subscribe(closePopup)
 
+        triggerMessage = WA.ui.displayActionMessage({
+            message: "Press the 'SPACE' to open X",
+            callback: () => {
+                WA.nav.openTab('https://twitter.com/SeiNetwork');
+            }
+        });
+
+    })
+
+    WA.room.area.onLeave('npcpanda').subscribe(() => {
+        closeTriger();
+        WA.room.website.delete('coWeb');
+        closePopup();
+    })  
     //NPC PANDA
 
     //NPC JAY
@@ -132,12 +146,12 @@ WA.onInit().then(() => {
 
                 WA.room.website.create({
                     name: 'bubblerweb',
-                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081947537352699914/bubblers.png?width=596&height=675",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081947537352699914/bubblers.png?width=300&height=340",
                     position: {
-                      x: playerX + 100,
-                      y: playerY - 335,
-                      width: 596,
-                      height: 675
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                   });
@@ -167,12 +181,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081981852493025300/woodenstatue.png?width=596&height=675",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081981852493025300/woodenstatue.png?width=300&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 596,
-                        height: 675
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -202,12 +216,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081947537843425350/sandshark.png?width=596&height=675",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081947537843425350/sandshark.png?width=300&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 596,
-                        height: 675
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -237,12 +251,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081992872443789373/crystal.png?width=596&height=675",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081992872443789373/crystal.png?width=300&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 596,
-                        height: 675
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -272,12 +286,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081995416826040361/tree.png?width=596&height=675",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1081995416826040361/tree.png?width=300&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 596,
-                        height: 675
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -307,12 +321,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1081590822379720724/1082000121409052763/bushes.png?width=596&height=675",
+                    url: "https://media.discordapp.net/attachments/1081590822379720724/1082000121409052763/bushes.png?width=300&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 596,
-                        height: 675
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -342,12 +356,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081654218450010243/e2b43b93f01f5797.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081654218450010243/e2b43b93f01f5797.png?width=450&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 911,
-                        height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -378,12 +392,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655031121592320/2.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655031121592320/2.png?width=450&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 911,
-                        height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -414,12 +428,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655039891865660/3.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655039891865660/3.png?width=450&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 911,
-                        height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -449,12 +463,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655077820965006/4.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655077820965006/4.png?width=450&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 911,
-                        height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -484,12 +498,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545432163340309/1081655106652614746/5.png?width=450&height=340",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 911,
-                        height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 500,
+                        height: 400
                     },
                     allowApi: true
                     });
@@ -574,7 +588,7 @@ WA.onInit().then(() => {
     });
 
     // MONSTR
-    WA.room.area.onEnter('monster').subscribe(() => {
+    WA.room.onEnterLayer("monsterlab").subscribe(() => {
 
 
         console.log(playerX, playerY, nav)
@@ -632,7 +646,7 @@ WA.onInit().then(() => {
 
     })
 
-    WA.room.area.onLeave('monster').subscribe(() => {
+    WA.room.onLeaveLayer("monsterlab").subscribe(() => {
 
     })
     //  MONSTR 
@@ -659,12 +673,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1080545122669834332/1083019062185041971/2_2.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1045861157883351091/1133225099189833768/bbbb.png",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 911,
-                        height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 310,
+                        height: 230
                     },
                     allowApi: true
                     });
@@ -680,7 +694,7 @@ WA.onInit().then(() => {
 
     //NPC LABFROG
     WA.room.area.onEnter('labfrogzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("labfrog","If you misbehave, I'll eat you like that frog.",[]);
+        currentPopup = WA.ui.openPopup("labfrog","Hey, you won't get any answers from me, don't even think about that. And remember, I'm watching you!",[]);
         var mysound = WA.sound.loadSound("sound/lab/frog.wav");
         mysound.play(config);
     })
@@ -689,7 +703,8 @@ WA.onInit().then(() => {
     
     //NPC LABBOBR
     WA.room.area.onEnter('labbobrzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("labbobr","Hey, you won't get any answers from me, don't even think about that. And remember, I'm watching you!",[]);
+        console.log("Test");
+        currentPopup = WA.ui.openPopup("labbobr","If you misbehave, I'll eat you like that frog.",[]);
         var mysound = WA.sound.loadSound("sound/lab/bobr.mp3");
         mysound.play(config);
     })
@@ -711,12 +726,12 @@ WA.onInit().then(() => {
                 //console.log(playerX, playerY);
                 WA.room.website.create({
                     name: "coWeb",
-                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088846637566267533/all.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088846637566267533/all.png?width=400&height=300",
                     position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 911,
-                        height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 420,
+                        height: 360
                     },
                     allowApi: true
                     });
@@ -738,7 +753,7 @@ WA.onInit().then(() => {
         triggerMessage = WA.ui.displayActionMessage({
             message: "Press the 'SPACE' to listen stone",
             callback: () => {
-                sound = WA.sound.loadSound("sound/lava/seim.mp3").play(config);
+                sound = WA.sound.loadSound("sound/lava/seim.mp3").play(config2);
                 
             }
         });
@@ -759,20 +774,20 @@ WA.onInit().then(() => {
             });
             WA.room.website.create({
                 name: "coWeb",
-                url: "https://media.discordapp.net/attachments/1080545477625380936/1088825752327311440/morze.png?width=676&height=676",
+                url: "https://media.discordapp.net/attachments/1080545477625380936/1088825752327311440/morze.png?width=400&height=400",
                 position: {
-                    x: playerX - 800,
-                    y: playerY - 435,
-                    width: 676,
-                    height: 676  
+                    x: playerX - 400,
+                    y: playerY - 235,
+                    width: 476,
+                    height: 476  
                 },
                 allowApi: true
                 });
 
         triggerMessage = WA.ui.displayActionMessage({
-            message: "Press the 'SPACE' to listen SOS",
+            message: "Press the 'SPACE' to listen SOS example",
             callback: () => {
-                sound = WA.sound.loadSound("sound/lava/sosm.mp3").play(config);
+                sound = WA.sound.loadSound("sound/lava/sosm.mp3").play(config2);
                 
             }
         });
@@ -801,12 +816,12 @@ WA.onInit().then(() => {
 
                 WA.room.website.create({
                     name: 'coWeb',
-                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851020504899604/C.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851020504899604/C.png?width=300&height=200",
                     position: {
-                      x: playerX + 100,
-                      y: playerY - 335,
-                      width: 911,
-                      height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 310,
+                        height: 230
                     },
                     allowApi: true
                   });
@@ -837,12 +852,12 @@ WA.onInit().then(() => {
 
                 WA.room.website.create({
                     name: 'coWeb',
-                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851021431840799/o.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851021431840799/o.png?width=300&height=200",
                     position: {
-                      x: playerX - 1000,
-                      y: playerY - 335,
-                      width: 911,
-                      height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 310,
+                        height: 230
                     },
                     allowApi: true
                   });
@@ -873,12 +888,12 @@ WA.onInit().then(() => {
 
                 WA.room.website.create({
                     name: 'coWeb',
-                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851021431840799/o.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851021431840799/o.png?width=300&height=200",
                     position: {
-                      x: playerX + 100,
-                      y: playerY - 335,
-                      width: 911,
-                      height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 310,
+                        height: 230
                     },
                     allowApi: true
                   });
@@ -909,12 +924,12 @@ WA.onInit().then(() => {
 
                 WA.room.website.create({
                     name: 'coWeb',
-                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851020832047224/m.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545477625380936/1088851020832047224/m.png?width=300&height=200",
                     position: {
-                      x: playerX + 100,
-                      y: playerY - 335,
-                      width: 911,
-                      height: 676
+                        x: playerX + 50,
+                        y: playerY - 150,
+                        width: 310,
+                        height: 230
                     },
                     allowApi: true
                   });
@@ -980,17 +995,17 @@ WA.onInit().then(() => {
 
                 var mysound = WA.sound.loadSound("sound/scan.wav");
                 mysound.play(config);
-                currentPopup = WA.ui.openPopup("underinfopopup","QUEST UNDERWATER",[]);
+                currentPopup = WA.ui.openPopup("underinfopopup","Hey there, brave adventurer! Here's the challenge: crack four riddles, seize the first letter of each answer, and unveil the mystery. May fortune favor you on this quest!",[]);
 
 
                 WA.room.website.create({
                     name: 'coWeb',
-                    url: "https://media.discordapp.net/attachments/1080545536349835434/1089137081630072914/18fc7226d0914eeb.png?width=911&height=676",
+                    url: "https://media.discordapp.net/attachments/1080545536349835434/1089137081630072914/18fc7226d0914eeb.png?width=450&height=340",
                     position: {
                       x: playerX + 100,
-                      y: playerY - 335,
-                      width: 911,
-                      height: 676
+                      y: playerY - 100,
+                      width: 500,
+                      height: 400
                     },
                     allowApi: true
                   });
@@ -1011,7 +1026,7 @@ WA.onInit().then(() => {
 
     //NPC OASIS
     WA.room.area.onEnter('npcoasiszone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcoasispopup","OASIS ROBOT",[]);
+        currentPopup = WA.ui.openPopup("npcoasispopup","Attention, adventurer! Mysterious cipher in robot memory. Each knows just one letter. Your task: gather letters, solve the enigma. Good luck!",[]);
         var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
         mysound.play(config);
     })
@@ -1130,12 +1145,12 @@ WA.onInit().then(() => {
     
                     WA.room.website.create({
                         name: 'coWeb',
-                        url: "https://media.discordapp.net/attachments/1080545367126446162/1089225147476627656/1a4050f6eed938f5.png?width=1018&height=676",
+                        url: "https://media.discordapp.net/attachments/1080545367126446162/1089225147476627656/1a4050f6eed938f5.png?width=500&height=340",
                         position: {
                           x: playerX + 100,
-                          y: playerY - 335,
-                          width: 1018,
-                          height: 676
+                          y: playerY - 100,
+                          width: 550,
+                          height: 400
                         },
                         allowApi: true
                       });
@@ -1170,12 +1185,12 @@ WA.onInit().then(() => {
 
                     WA.room.website.create({
                         name: 'coWeb',
-                        url: "https://media.discordapp.net/attachments/1080545367126446162/1089225085199597588/2.png?width=1018&height=676",
+                        url: "https://media.discordapp.net/attachments/1080545367126446162/1089225085199597588/2.png?width=500&height=340",
                         position: {
-                        x: playerX + 100,
-                        y: playerY - 335,
-                        width: 1018,
-                        height: 676
+                            x: playerX + 100,
+                            y: playerY - 100,
+                            width: 550,
+                            height: 400
                         },
                         allowApi: true
                     });
@@ -1189,14 +1204,46 @@ WA.onInit().then(() => {
         })
         //NPC Jungle tab
 
-        //NPC JUNGLE2
+        //NPC ICE
         WA.room.area.onEnter('jungle2zone').subscribe(() => {
-            currentPopup = WA.ui.openPopup("jungle2popup","JUNGLE1",[]);
+            currentPopup = WA.ui.openPopup("jungle2popup","Listen, traveler! I have a task for you. Solve the riddle I've prepared. It's not that difficult, but it requires some cleverness. Get to it, and if you succeed, I promise a reward for your efforts! Good luck!",[]);
             var mysound = WA.sound.loadSound("sound/npc/robot2.mp3");
             mysound.play(config);
+
+            WA.player.onPlayerMove((moveEvent) => {
+                playerX = moveEvent.x;
+                playerY = moveEvent.y;
+              });
+    
+            triggerMessage = WA.ui.displayActionMessage({
+                message: "Press the 'SPACE' to scan",
+                callback: () => {
+    
+                    var mysound = WA.sound.loadSound("sound/scan.wav");
+                    mysound.play(config);
+    
+                    WA.room.website.create({
+                        name: 'coWeb',
+                        url: "https://media.discordapp.net/attachments/1078581613904003095/1090330914074136676/e1eb6f0f22df4aba.png?width=450&height=340",
+                        position: {
+                          x: playerX + 100,
+                          y: playerY - 100,
+                          width: 550,
+                          height: 400
+                        },
+                        allowApi: true
+                      });
+                }
+            });
+    
         })
-        WA.room.area.onLeave('jungle2zone').subscribe(closePopup)
-        //NPC JUNGLE2
+
+        WA.room.area.onLeave('jungle2zone').subscribe(() => {
+            closeTriger();
+            WA.room.website.delete('coWeb');
+            closePopup();
+        })  
+        //NPC ICE
 
     // ------------------------------------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
@@ -1240,6 +1287,16 @@ function stopSound(){
 //NPC SOUND
 var config = {
     volume : 0.4,
+    loop : false,
+    rate : 1,
+    detune : 1,
+    delay : 0,
+    seek : 0,
+    mute : false
+};
+
+var config2 = {
+    volume : 1,
     loop : false,
     rate : 1,
     detune : 1,
