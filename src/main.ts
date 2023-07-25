@@ -1244,6 +1244,26 @@ WA.onInit().then(() => {
             closePopup();
         })  
         //NPC ICE
+        
+        //CASINO
+        WA.room.area.onEnter('casinonpczone').subscribe(() => {
+            currentPopup = WA.ui.openPopup("casinonpcpopup","Welcome to our intergalactic casino, adventurer! Step right in and try your luck in the most thrilling games the cosmos has to offer. Riches, excitement, and endless fun await you! Come, place your bets, and let the games begin! May fortune favor the bold!",[]);
+            var mysound = WA.sound.loadSound("sound/under/shark.wav");
+            mysound.play(config);
+        })
+
+        WA.room.area.onLeave('casinonpczone').subscribe(() => {
+            closePopup();
+        })
+
+        WA.room.area.onEnter('casinozone').subscribe(() => {
+            WA.nav.openCoWebSite('https://cdn.discordapp.com/attachments/1045861157883351091/1133273368800546916/rules.png', true, "", 60, 1, true, false);
+        })
+
+        WA.room.area.onLeave('casinozone').subscribe(() => {
+        })        
+
+        
 
     // ------------------------------------------------------------------------------------------------------------------------------
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
