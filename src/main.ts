@@ -48,7 +48,7 @@ WA.onInit().then(() => {
 
     //NPC PIRATE
     WA.room.area.onEnter('npcpiratezone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcpiratepopup","CAPTAIN BOTTLE-TOP: Welcome on board, mate! Our spaceship crashed on this Unknown Planet, and we must find our way back home! I learned that we must solve the riddles to defeat the Force of the Unknown Planet and get our spaceship free to go back home!Lets do this!",[]);
+        currentPopup = WA.ui.openPopup("npcpiratepopup","CAPTAIN BOTTLE-TOP: Welcome on board, mate! Our spaceship crashed on this Unknown Planet, and we must find our way back home! I learned that we must solve the riddles to defeat the Force of the Unknown Planet and get our spaceship free to go back home! Let’s do this!",[]);
         var mysound = WA.sound.loadSound("sound/npc/pirate.wav");
         mysound.play(config);
     })
@@ -66,7 +66,7 @@ WA.onInit().then(() => {
 
     //NPC ADMIN
     WA.room.area.onEnter('npcadminzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcadmin1popup","BoJack: Did you notice the violation? Lets ban him?",[]);
+        currentPopup = WA.ui.openPopup("npcadmin1popup","BoJack: Did you notice the violation? Let's ban him?",[]);
         currentPopup2 = WA.ui.openPopup("npcadmin2popup","Zaragossa: I'll keep an eye on him from an ambush...",[]);
         var mysound = WA.sound.loadSound("sound/npc/horse.mp3");
         mysound.play(config);
@@ -104,7 +104,7 @@ WA.onInit().then(() => {
         triggerMessage = WA.ui.displayActionMessage({
             message: "Press the 'SPACE' to open X",
             callback: () => {
-                WA.nav.openTab('https://twitter.com/SeiNetwork');
+                WA.nav.openTab('https://twitter.com/seinetwork/status/1684239361146081283?s=46&t=Khk7TMkd05HfWeBpGewjNA');
             }
         });
 
