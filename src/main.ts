@@ -956,7 +956,7 @@ WA.onInit().then(() => {
 
     //NPC CRAB
     WA.room.area.onEnter('npcwatercrabzone').subscribe(() => {
-        currentPopup = WA.ui.openPopup("npcwatercrabpopup","I am a five-letter word, but I am often seen as a single letter on a playing card. I represent a powerful figure. What am I?",[]);
+        currentPopup = WA.ui.openPopup("npcwatercrabpopup","I am a four-letter word, but I am often seen as a single letter on a playing card. I represent a powerful figure. What am I?",[]);
         var mysound = WA.sound.loadSound("sound/under/crab.wav");
         mysound.play(config);
     })
